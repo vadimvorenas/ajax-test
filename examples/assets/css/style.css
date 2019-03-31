@@ -1,0 +1,67 @@
+html {
+    font-size: unset;
+}
+span.glyphicon-refresh {
+    display: none;
+    animation: 1s linear 0s normal none infinite running rot;
+    -webkit-animation: 1s linear 0s normal none infinite running rot;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    vertical-align: middle;
+}
+span.btn-show {
+    display: inline-block;
+}
+@keyframes rot {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes rot {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#table-users {
+    text-align: center;
+}
+
+.btn-users-table {
+    background-color: #27293d;
+    border: unset;
+    border-radius: 7px;
+    color: aquamarine;
+}
+
+#modal-profile form{
+    background-color: #25262e;
+    position: relative;
+    border-radius: 10px;
+    margin: auto;
+    width: 90%;
+    padding: 2% 15px;
+    margin-top: 12%;
+}
+#modal-profile{
+    display: none;
+    position: absolute;
+    min-width: 96vw;
+    min-height: 100vh;
+    padding: unset;
+    margin: unset;
+    top: 0;
+    background-color: #6c6c6ca3;
+    z-index: 2000;
+}
+
+.card .card-footer {
+    text-align: center;
+}

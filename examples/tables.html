@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <title>
+        Table Users
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/demo/demo.css" rel="stylesheet"/>
+    <script src="assets/js/main.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+
+<body class="">
+<div class="wrapper">
+    <div class="sidebar">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+      -->
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="javascript:void(0)" class="simple-text logo-normal">
+                    SkyPro
+                </a>
+            </div>
+            <ul class="nav">
+                <li>
+                    <a href="./index.html">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="active ">
+                    <a href="./tables.html">
+                        <i class="tim-icons icon-puzzle-10"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle d-inline">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:void(0)">Table List</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <div class="photo">
+                                    <img src="assets/img/anime3.png" alt="Profile Photo">
+                                </div>
+                                <b class="caret d-none d-lg-block d-xl-block"></b>
+                                <p class="d-lg-none">
+                                    Log out
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li class="dropdown-divider"></li>
+                                <li class="nav-link">
+                                    <a href="javascript:logout()" class="nav-item dropdown-item">Log out</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="separator d-lg-none"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="card-title"> Simple Table</h4>
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            <p id='error' style='color: #ff4645; display: none;' class='text-center'></p>
+                            <p id='success' style='color: #1f3bff; display: none;' class='text-center'></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table tablesorter " id="table-users">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Login
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Country
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="user-table">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="copyright">
+                    ©
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    made with Vadim.
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!--    Modal window-->
+<div id="modal-profile" class="card-body">
+    <form id="modal-profile-form">
+        <div class="row">
+            <div class="col-md-5 pr-md-1">
+                <div class="form-group">
+                    <label>Company</label>
+                    <input id="company" type="text" class="form-control" placeholder="Company"
+                           value="Creative Code Inc.">
+                </div>
+            </div>
+            <div class="col-md-3 px-md-1">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input id="username" minlength="3" disabled type="text" class="form-control"
+                           placeholder="Username" value="">
+                    <input hidden id="id-user" type="text" class="form-control"
+                           value="">
+                </div>
+            </div>
+            <div class="col-md-4 pl-md-1">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input id="email" disabled type="email" class="form-control"
+                           placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                    <label>First Name*</label>
+                    <input id="first-name" minlength="3" required type="text" class="form-control"
+                           placeholder="Company" value="">
+                </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input id="last-name" type="text" class="form-control"
+                           placeholder="Last Name" value="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                    <label>City</label>
+                    <input id="city" type="text" class="form-control" placeholder="City"
+                           value="">
+                </div>
+            </div>
+            <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                    <label>Country</label>
+                    <input id="country" type="text" class="form-control" placeholder="Country"
+                           value="">
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>About Me</label>
+                    <textarea id="about-me" rows="4" cols="80" class="form-control"
+                              placeholder="Here can be your description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <button id="btn-save" type="submit" class="btn btn-fill btn-primary">Save</button>
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            <button id="btn-close" type="button" class="btn btn-fill btn-primary">Close</button>
+        </div>
+        <p id='modal-error' style='color: #ff4645; display: none;' class='text-center'></p>
+        <p id='modal-success' style='color: #1f3bff; display: none;' class='text-center'></p>
+    </form>
+</div>
+<!--End modal window-->
+
+<script>
+    $(document).ready(function () {
+        // Check token
+        checkToken(getCookie('accessToken'));
+
+        //Get all users in table
+        let request = {"action": "getAllUsers"};
+        $.ajax({
+            type: "POST",
+            url: HOST_URL + 'api.php',
+            data: JSON.stringify(request),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                let obj = JSON.parse(data);
+
+                if (obj['error'] === '') {
+                    for (let item of obj.data) {
+                        $('#user-table').append(
+                            '<tr id="tr-' + item.id + '">' +
+                            '<td class="td-name">' + item.first_name + '</td>' +
+                            '<td class="td-username">' + item.username + '</td>' +
+                            '<td class="td-email">' + item.email + '</td>' +
+                            '<td class="td-country">' + item.country + '</td>' +
+                            '<td class="td-button"><button id="" type="button" class="btn-users-table user-edit" value="' + item.id +
+                            '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>' +
+                            '<button id="" class="btn-users-table user-delete" value="' + item.id +
+                            '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>' +
+                            '</tr>'
+                        )
+                    }
+                }
+                //delete user
+                $('button.user-delete').on('click', function (event) {
+                    checkToken(getCookie('accessToken'));
+
+                    if (!confirm('Delete profile?')) {
+                        return;
+                    }
+                    $('button.user-delete').prop('disabled', true);
+                    $('.glyphicon-refresh').toggleClass('btn-show', true);
+                    let id = $(this).val();
+                    let request = {
+                        "action": "deleteUserById", "params": {
+                            "id": id
+                        }
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: HOST_URL + 'api.php',
+                        data: JSON.stringify(request),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $('button.user-delete').prop('disabled', false);
+                            $('.glyphicon-refresh').toggleClass('btn-show', false);
+                            let obj = JSON.parse(data);
+
+                            if (obj['error'] === '') {
+                                $('#tr-' + id).remove();
+                                $("#success").text("Profile delete").show().delay(3000).fadeOut(1000);
+                            } else {
+                                $("#error").text(obj.error).show().delay(5000).fadeOut(1000);
+                            }
+                        }
+                    });
+                });
+                // Edit user
+                $('button.user-edit').on('click', function (event) {
+                    checkToken(getCookie('accessToken'));
+
+                    let id = $(this).val();
+                    let request = {
+                        "action": "getUserById", "params": {
+                            "id": id
+                        }
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: HOST_URL + 'api.php',
+                        data: JSON.stringify(request),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            let obj = JSON.parse(data);
+                            if (obj['error'] === '') {
+                                obj = obj['data'];
+                                $("#email").val(obj.email);
+                                $("#username").val(obj.username);
+                                $("#company").val(obj.company);
+                                $("#first-name").val(obj.first_name);
+                                $("#last-name").val(obj.last_name);
+                                $("#city").val(obj.city);
+                                $("#country").val(obj.country);
+                                $("#about-me").val(obj.about_me);
+                                $("#id-user").val(obj.id);
+                                $('#modal-profile').show();
+                            }
+                        }
+                    });
+                    //Close modal window
+                    $('#btn-close').on('click', function () {
+                        event.preventDefault();
+
+                        $(".alert-msg").remove();
+                        $('#modal-profile').hide();
+                    });
+                    // Update user
+                    $('#modal-profile').on('submit', function (event) {
+                        event.preventDefault();
+
+                        checkToken(getCookie('accessToken'));
+                        $('#btn-save').prop('disabled', true);
+                        $('.glyphicon-refresh').toggleClass('btn-show', true);
+                        let request = {
+                            "action": "editUserById", "params": {
+                                "email": $("#email").val(),
+                                "username": $("#username").val(),
+                                "company": $("#company").val(),
+                                "first_name": $("#first-name").val(),
+                                "last_name": $("#last-name").val(),
+                                "city": $("#city").val(),
+                                "country": $("#country").val(),
+                                "about_me": $("#about-me").val(),
+                                "id": $("#id-user").val()
+                            }
+                        };
+
+                        $.ajax({
+                            type: "POST",
+                            url: HOST_URL + 'api.php',
+                            data: JSON.stringify(request),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                let obj = JSON.parse(data);
+                                // $('#tr-' + id).empty();
+
+                                let request = {
+                                    "action": "getUserById", "params": {
+                                        "id": id
+                                    }
+                                };
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: HOST_URL + 'api.php',
+                                    data: JSON.stringify(request),
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (data) {
+                                        let obj = JSON.parse(data);
+
+                                        if (obj.error === '') {
+                                            obj = obj.data;
+                                            let id_selector = '#tr-' + id;
+                                            $(id_selector + ' .td-name').text(obj.first_name);
+                                            $(id_selector + ' .td-username').text(obj.username);
+                                            $(id_selector + ' .td-email').text(obj.email);
+                                            $(id_selector + ' .td-country').text(obj.country);
+                                        }
+                                    }
+                                });
+
+                                $('#btn-save').prop('disabled', false);
+                                $('.glyphicon-refresh').toggleClass('btn-show', false);
+                                if (obj.error === '') {
+                                    $("#modal-success").text("Profile successfully updated").show().delay(3000).fadeOut(1000);
+                                } else {
+                                    $("#modal-error").text(obj.error).show().delay(5000).fadeOut(1000);
+                                }
+                            }
+                        });
+                    })
+                });
+            }
+        });
+
+    });
+
+
+</script>
+
+<!--   Core JS Files   -->
+<script src="assets/js/core/jquery.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+<!-- Black Dashboard DEMO methods, don't include it in your project! -->
+<script src="assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function () {
+        $().ready(function () {
+            $sidebar = $('.sidebar');
+            $navbar = $('.navbar');
+            $main_panel = $('.main-panel');
+
+            $full_page = $('.full-page');
+
+            $sidebar_responsive = $('body > .navbar-collapse');
+            sidebar_mini_active = true;
+            white_color = false;
+
+            window_width = $(window).width();
+
+            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+            $('.fixed-plugin a').click(function (event) {
+                if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                }
+            });
+
+            $('.fixed-plugin .background-color span').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+
+                var new_color = $(this).data('color');
+
+                if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                }
+
+                if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                }
+
+                if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                }
+            });
+
+            $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                }
+
+                // we simulate the window Resize so the charts will get updated in realtime.
+                var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 180);
+
+                // we stop the simulation of Window Resize after the animations are completed
+                setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                }, 1000);
+            });
+
+            $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                var $btn = $(this);
+
+                if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                        $('body').removeClass('change-background');
+                        $('body').addClass('white-content');
+                    }, 900);
+                    white_color = true;
+                }
+
+            });
+
+            $('.light-badge').click(function () {
+                $('body').addClass('white-content');
+            });
+
+            $('.dark-badge').click(function () {
+                $('body').removeClass('white-content');
+            });
+        });
+    });
+</script>
+</body>
+
+</html>
