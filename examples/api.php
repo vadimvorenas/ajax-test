@@ -57,13 +57,13 @@ function login($params)
         'pass' => $pass];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $arr = $cursor->toArray();
     $id_user = (string)$arr[0]->_id;
 
     if ($id_user) {
         $bulk->update(['_id' => $arr[0]->_id], ['$set' => ['token' => $asset_token]]);
-        $db->executeBulkWrite('ajax.users', $bulk);
+        $db->executeBulkWrite('test.users', $bulk);
         $to_json = ['error' => '', 'data' => ['accessToken' => $asset_token]];
 
         echo json_encode($to_json);
@@ -81,7 +81,7 @@ function getUserByToken($params)
     $filter = ['token' => $asset_token];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $arr = $cursor->toArray();
     $id_user = (string)$arr[0]->_id;
 
@@ -113,7 +113,7 @@ function getAllUsers()
     $filter = [];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $arr = $cursor->toArray();
 
     if (!empty($arr)) {
@@ -147,7 +147,7 @@ function updateProfileByToken($params)
     $bulk = new MongoDB\Driver\BulkWrite();
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $arr = $cursor->toArray();
     $id_user = (string)$arr[0]->_id;
 
@@ -160,7 +160,7 @@ function updateProfileByToken($params)
             'city' => $params->city,
             'about_me' => $params->about_me
         ]]);
-        $result = $db->executeBulkWrite('ajax.users', $bulk);
+        $result = $db->executeBulkWrite('test.users', $bulk);
         if (count($result->getWriteErrors()) > 0) {
             $to_json = ['error' => 'error occurred during update'];
             echo json_encode($to_json);
@@ -180,7 +180,7 @@ function checkToken($params)
     $filter = ['token' => $params->token];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $result = $cursor->toArray();
     $result = $result[0]->token;
 
@@ -198,7 +198,7 @@ function checkEmail(MongoDB\Driver\Manager $db, string $email)
     $filter = ['email' => $email];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $result = $cursor->toArray();
     $result = $result[0]->email;
 
@@ -214,7 +214,7 @@ function checkUsername(MongoDB\Driver\Manager $db, string $login)
     $filter = ['username' => $login];
 
     $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-    $cursor = $db->executeQuery('ajax.users', $query);
+    $cursor = $db->executeQuery('test.users', $query);
     $result = $cursor->toArray();
     $result = $result[0]->username;
 
@@ -247,7 +247,7 @@ function registration($params)
                 'city' => $params->city,
                 'about_me' => ''
             ]);
-            $result = $db->executeBulkWrite('ajax.users', $bulk);
+            $result = $db->executeBulkWrite('test.users', $bulk);
 
             if ($result->getInsertedCount()) {
                 $to_json = ['error' => '', 'data' => ['accessToken' => $asset_token]];
@@ -276,7 +276,7 @@ function getUserById($params)
         $filter = ['_id' => $id_user];
 
         $query = new MongoDB\Driver\Query($filter, DB::default_options_search());
-        $cursor = $db->executeQuery('ajax.users', $query);
+        $cursor = $db->executeQuery('test.users', $query);
         $arr = $cursor->toArray();
         $result = $arr[0];
         $result_response = [
@@ -313,7 +313,7 @@ function editUserById ($params)
             'city' => $params->city,
             'about_me' => $params->about_me
         ]]);
-        $result = $db->executeBulkWrite('ajax.users', $bulk);
+        $result = $db->executeBulkWrite('test.users', $bulk);
         if (count($result->getWriteErrors()) > 0) {
             $to_json = ['error' => 'error occurred during update'];
             echo json_encode($to_json);
@@ -335,7 +335,7 @@ function deleteUserById ($params)
         $id_user = new \MongoDB\BSON\ObjectId($params->id);
 
         $bulk->delete(['_id' => $id_user]);
-        $result = $db->executeBulkWrite('ajax.users', $bulk);
+        $result = $db->executeBulkWrite('test.users', $bulk);
         if ($result->getDeletedCount() > 0) {
             $to_json = ['error' => ''];
             echo json_encode($to_json);

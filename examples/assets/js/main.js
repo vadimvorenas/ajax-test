@@ -1,5 +1,4 @@
 HOST_URL = 'http://vadimvorenas.ddns.net/';
-// HOST_URL = 'http://ajax.loc/';
 
 function getCookie(name) {
     var dc = document.cookie;

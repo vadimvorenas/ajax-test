@@ -65,3 +65,11 @@ span.btn-show {
 .card .card-footer {
     text-align: center;
 }
+
+.main-panel {
+    min-height: 94vh;
+}
+
+.perfect-scrollbar-on .sidebar, .perfect-scrollbar-on .main-panel {
+    height: 94%;
+}
